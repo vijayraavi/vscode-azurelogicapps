@@ -60,6 +60,8 @@
         "onCommand:azureLogicApps.openInPortal",
         "onCommand:azureLogicApps.runTrigger",
         "onCommand:azureLogicApps.resubmitRun",
+        "onCommand:azureLogicApps.workflow.enable",
+        "onCommand:azureLogicApps.workflow.disable",
         "workspaceContains:local.settings.json",
         "workspaceContains:host.json",
         "onView:azureFunctionsExplorer"
@@ -125,6 +127,16 @@
             {
                 "command": "azureLogicApps.runTrigger",
                 "title": "Run trigger",
+                "category": "Azure Logic Apps"
+            },
+            {
+                "command": "azureLogicApps.workflow.enable",
+                "title": "Enable",
+                "category": "Azure Logic Apps"
+            },
+            {
+                "command": "azureLogicApps.workflow.disable",
+                "title": "Disable",
                 "category": "Azure Logic Apps"
             },
             {
@@ -316,6 +328,16 @@
                 },
                 {
                     "command": "azureLogicApps.runTrigger",
+                    "when": "view == azureFunctionsExplorer && viewItem == azLogicAppsWorkflows",
+                    "group": "1@2"
+                },
+                {
+                    "command": "azureLogicApps.workflow.enable",
+                    "when": "view == azureFunctionsExplorer && viewItem == azLogicAppsWorkflows",
+                    "group": "1@2"
+                },
+                {
+                    "command": "azureLogicApps.workflow.disable",
                     "when": "view == azureFunctionsExplorer && viewItem == azLogicAppsWorkflows",
                     "group": "1@2"
                 },

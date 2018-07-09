@@ -36,6 +36,8 @@ import { restartFunctionApp } from './commands/restartFunctionApp';
 import { resubmitRun } from './commands/resubmitRun';
 import { runTrigger, startFunctionApp } from './commands/runTrigger';
 import { stopFunctionApp } from './commands/stopFunctionApp';
+import { disable } from './commands/workflow/disable';
+import { enable } from './commands/workflow/enable';
 import { CodeViewEditor } from './editor/CodeViewEditor';
 import { RunCodeViewEditor } from './editor/RunCodeViewEditor';
 import { WorkflowEditorManager } from './editor/WorkflowEditorManager';
@@ -44,7 +46,7 @@ import { getTemplateData } from './templates/TemplateData';
 import { WorkflowCodeViewTreeItem } from './tree/WorkflowCodeViewTreeItem';
 import { WorkflowRunTreeItem } from './tree/WorkflowRunTreeItem';
 import { WorkflowsProvider } from './tree/WorkflowsProvider';
-import { WorkflowsTreeItem } from './tree/WorkflowTreeItem';
+import { WorkflowTreeItem } from './tree/WorkflowTreeItem';
 import { dotnetUtils } from './utils/dotnetUtils';
 import { functionRuntimeUtils } from './utils/functionRuntimeUtils';
 
@@ -126,9 +128,12 @@ export function activate(context: vscode.ExtensionContext): void {
         actionHandler.registerCommand('azureFunctions.appSettings.delete', async (node?: IAzureNode<AppSettingTreeItem>) => await deleteNode(tree, AppSettingTreeItem.contextValue, node));
         actionHandler.registerCommand('azureFunctions.uninstallDotnetTemplates', async () => await dotnetUtils.uninstallTemplates());
 
-        actionHandler.registerCommand('azureLogicApps.openInPortal', async (node?: IAzureNode<WorkflowsTreeItem>) => await openInPortal(tree, node));
-        actionHandler.registerCommand('azureLogicApps.runTrigger', async (node?: IAzureNode<WorkflowsTreeItem>) => await runTrigger(tree, node));
+        actionHandler.registerCommand('azureLogicApps.openInPortal', async (node?: IAzureNode<WorkflowTreeItem>) => await openInPortal(tree, node));
+        actionHandler.registerCommand('azureLogicApps.runTrigger', async (node?: IAzureNode<WorkflowTreeItem>) => await runTrigger(tree, node));
         actionHandler.registerCommand('azureLogicApps.resubmitRun', async (node?: IAzureNode<WorkflowRunTreeItem>) => await resubmitRun(tree, node));
+
+        actionHandler.registerCommand('azureLogicApps.workflow.enable', async (node?: IAzureNode<WorkflowTreeItem>) => await enable(tree, node));
+        actionHandler.registerCommand('azureLogicApps.workflow.disable', async (node?: IAzureNode<WorkflowTreeItem>) => await disable(tree, node));
 
         actionHandler.registerCommand('azLogicApps.openCodeView', async (node?: IAzureNode) => {
             await editorManager.showDocument(new CodeViewEditor(<IAzureNode<WorkflowCodeViewTreeItem>>node), 'workflow.json');

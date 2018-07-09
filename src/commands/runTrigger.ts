@@ -5,11 +5,11 @@
 
 import { AzureTreeDataProvider, IAzureNode } from 'vscode-azureextensionui';
 import { ext } from '../extensionVariables';
-import { WorkflowsTreeItem } from '../tree/WorkflowTreeItem';
+import { WorkflowTreeItem } from '../tree/WorkflowTreeItem';
 
-export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowsTreeItem>): Promise<void> {
+export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowTreeItem>): Promise<void> {
     if (!node) {
-        node = <IAzureNode<WorkflowsTreeItem>>await tree.showNodePicker(WorkflowsTreeItem.contextValue);
+        node = <IAzureNode<WorkflowTreeItem>>await tree.showNodePicker(WorkflowTreeItem.contextValue);
     }
 
     await node.runWithTemporaryDescription(

@@ -4,12 +4,19 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from 'vscode-azureextensionui';
-import { WorkflowTreeItem } from '../tree/WorkflowTreeItem';
+import { ext } from '../../extensionVariables';
+import { WorkflowTreeItem } from '../../tree/WorkflowTreeItem';
 
-export async function openInPortal(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowTreeItem>): Promise<void> {
+export async function enable(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowTreeItem>): Promise<void> {
     if (!node) {
         node = <IAzureNode<WorkflowTreeItem>>await tree.showNodePicker(WorkflowTreeItem.contextValue);
     }
 
-    node.openInPortal();
+    await node.runWithTemporaryDescription(
+        'Running...',
+        async () => {
+            // tslint:disable-next-line:no-non-null-assertion
+            await ext.client.workflows.enable(node.treeItem._workflow.id.split('/')[4], node.treeItem._workflow.name);
+        }
+    );
 }
