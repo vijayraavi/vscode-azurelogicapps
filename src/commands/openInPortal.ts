@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { AzureTreeDataProvider, IAzureNode } from 'vscode-azureextensionui';
-import { WorkflowsTreeItem } from '../tree/WorkflowsTreeItem';
+import { WorkflowsTreeItem } from '../tree/WorkflowTreeItem';
 
 export async function openInPortal(tree: AzureTreeDataProvider, node?: IAzureNode<FunctionAppTreeItem>): Promise<void> {
     if (!node) {

@@ -44,7 +44,7 @@ import { getTemplateData } from './templates/TemplateData';
 import { WorkflowCodeViewTreeItem } from './tree/WorkflowCodeViewTreeItem';
 import { WorkflowRunTreeItem } from './tree/WorkflowRunTreeItem';
 import { WorkflowsProvider } from './tree/WorkflowsProvider';
-import { WorkflowsTreeItem } from './tree/WorkflowsTreeItem';
+import { WorkflowsTreeItem } from './tree/WorkflowTreeItem';
 import { dotnetUtils } from './utils/dotnetUtils';
 import { functionRuntimeUtils } from './utils/functionRuntimeUtils';
 

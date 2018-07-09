@@ -9,9 +9,9 @@ import { WorkflowCodeViewTreeItem } from './WorkflowCodeViewTreeItem';
 import { WorkflowRunsTreeItem } from './WorkflowRunsTreeItem';
 import { WorkflowVersionsTreeItem } from './WorkflowVersionsTreeItem';
 
-export class WorkflowsTreeItem implements IAzureParentTreeItem {
+export class WorkflowTreeItem implements IAzureParentTreeItem {
     public static contextValue: string = 'azLogicAppsWorkflows';
-    public readonly contextValue: string = WorkflowsTreeItem.contextValue;
+    public readonly contextValue: string = WorkflowTreeItem.contextValue;
 
     private _state?: string;
     private readonly _workflowCodeViewTreeItem: WorkflowCodeViewTreeItem;

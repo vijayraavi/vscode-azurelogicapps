@@ -5,7 +5,7 @@
 
 import { AzureTreeDataProvider, IAzureNode } from 'vscode-azureextensionui';
 import { ext } from '../extensionVariables';
-import { WorkflowsTreeItem } from '../tree/WorkflowsTreeItem';
+import { WorkflowsTreeItem } from '../tree/WorkflowTreeItem';
 
 export async function runTrigger(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowsTreeItem>): Promise<void> {
     if (!node) {

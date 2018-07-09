@@ -9,7 +9,7 @@ import { Workflow } from "azure-arm-logic/lib/models";
 import { OutputChannel } from "vscode";
 import { IActionContext, IAzureNode, IAzureTreeItem, IChildProvider } from 'vscode-azureextensionui';
 import { ext } from '../extensionVariables';
-import { WorkflowsTreeItem } from "./WorkflowsTreeItem";
+import { WorkflowTreeItem } from "./WorkflowTreeItem";
 
 export class WorkflowsProvider implements IChildProvider {
     public readonly childTypeLabel: string = "Logic Apps";
@@ -51,7 +51,7 @@ export class WorkflowsProvider implements IChildProvider {
         const workflows = await client.workflows.listBySubscription();
 
         const workflowItems = workflows.map((workflow: Workflow) => {
-            return new WorkflowsTreeItem(workflow);
+            return new WorkflowTreeItem(workflow);
         });
 
         return workflowItems;

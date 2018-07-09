@@ -6,7 +6,7 @@
 import { AzureTreeDataProvider, IAzureNode } from 'vscode-azureextensionui';
 import { ext } from '../extensionVariables';
 import { WorkflowRunTreeItem } from '../tree/WorkflowRunTreeItem';
-import { WorkflowsTreeItem } from '../tree/WorkflowsTreeItem';
+import { WorkflowsTreeItem } from '../tree/WorkflowTreeItem';
 
 export async function resubmitRun(tree: AzureTreeDataProvider, node?: IAzureNode<WorkflowRunTreeItem>): Promise<void> {
     if (!node) {
