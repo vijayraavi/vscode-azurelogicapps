@@ -5,6 +5,7 @@
 
 import { Workflow } from 'azure-arm-logic/lib/models';
 import { IAzureParentTreeItem, IAzureTreeItem } from 'vscode-azureextensionui';
+import { nodeUtils } from '../utils/nodeUtils';
 import { WorkflowCodeViewTreeItem } from './WorkflowCodeViewTreeItem';
 import { WorkflowRunsTreeItem } from './WorkflowRunsTreeItem';
 import { WorkflowVersionsTreeItem } from './WorkflowVersionsTreeItem';
@@ -33,6 +34,10 @@ export class WorkflowTreeItem implements IAzureParentTreeItem {
 
     public get label(): string {
         return this._workflow.name || '';
+    }
+
+    public get iconPath(): string {
+        return nodeUtils.getIconPath(WorkflowTreeItem.contextValue);
     }
 
     public hasMoreChildren(): boolean {

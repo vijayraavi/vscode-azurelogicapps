@@ -334,12 +334,12 @@
                 {
                     "command": "azureLogicApps.workflow.enable",
                     "when": "view == azureFunctionsExplorer && viewItem == azLogicAppsWorkflows",
-                    "group": "1@2"
+                    "group": "2@1"
                 },
                 {
                     "command": "azureLogicApps.workflow.disable",
                     "when": "view == azureFunctionsExplorer && viewItem == azLogicAppsWorkflows",
-                    "group": "1@2"
+                    "group": "2@2"
                 },
                 {
                     "command": "azureLogicApps.resubmitRun",

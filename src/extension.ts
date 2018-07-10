@@ -73,9 +73,6 @@ export function activate(context: vscode.ExtensionContext): void {
         const ui: IAzureUserInput = new AzureUserInput(context.globalState);
         ext.ui = ui;
 
-        // tslint:disable-next-line:no-floating-promises
-        functionRuntimeUtils.validateFunctionRuntime();
-
         const tree: AzureTreeDataProvider = new AzureTreeDataProvider(new WorkflowsProvider(outputChannel), 'azureFunctions.loadMore', ui, reporter);
         ext.tree = tree;
         context.subscriptions.push(tree);
@@ -128,21 +125,25 @@ export function activate(context: vscode.ExtensionContext): void {
         actionHandler.registerCommand('azureFunctions.appSettings.delete', async (node?: IAzureNode<AppSettingTreeItem>) => await deleteNode(tree, AppSettingTreeItem.contextValue, node));
         actionHandler.registerCommand('azureFunctions.uninstallDotnetTemplates', async () => await dotnetUtils.uninstallTemplates());
 
+        // Workflow commands
         actionHandler.registerCommand('azureLogicApps.openInPortal', async (node?: IAzureNode<WorkflowTreeItem>) => await openInPortal(tree, node));
-        actionHandler.registerCommand('azureLogicApps.runTrigger', async (node?: IAzureNode<WorkflowTreeItem>) => await runTrigger(tree, node));
-        actionHandler.registerCommand('azureLogicApps.resubmitRun', async (node?: IAzureNode<WorkflowRunTreeItem>) => await resubmitRun(tree, node));
-
-        actionHandler.registerCommand('azureLogicApps.workflow.enable', async (node?: IAzureNode<WorkflowTreeItem>) => await enable(tree, node));
-        actionHandler.registerCommand('azureLogicApps.workflow.disable', async (node?: IAzureNode<WorkflowTreeItem>) => await disable(tree, node));
-
         actionHandler.registerCommand('azLogicApps.openCodeView', async (node?: IAzureNode) => {
             await editorManager.showDocument(new CodeViewEditor(<IAzureNode<WorkflowCodeViewTreeItem>>node), 'workflow.json');
         });
+        actionHandler.registerCommand('azureLogicApps.runTrigger', async (node?: IAzureNode<WorkflowTreeItem>) => await runTrigger(tree, node));
+        actionHandler.registerCommand('azureLogicApps.workflow.enable', async (node?: IAzureNode<WorkflowTreeItem>) => await enable(tree, node));
+        actionHandler.registerCommand('azureLogicApps.workflow.disable', async (node?: IAzureNode<WorkflowTreeItem>) => await disable(tree, node));
+        // Should see whether we can make enable/disable into one button, should be possible with "when" in package.json
 
+        // Workflow run commands
+        actionHandler.registerCommand('azureLogicApps.resubmitRun', async (node?: IAzureNode<WorkflowRunTreeItem>) => await resubmitRun(tree, node));
         actionHandler.registerCommand('azLogicApps.openRunCodeView', async (node?: IAzureNode) => {
             await editorManager.showDocument(new RunCodeViewEditor(<IAzureNode<WorkflowRunTreeItem>>node), 'run.json');
         });
 
+        // Workflow version commands
+
+        // Workflow events
         actionHandler.registerEvent('azLogicApps.WorkflowEditorManager.onDidSaveTextDocument', vscode.workspace.onDidSaveTextDocument, async function
             (this: IActionContext, doc: vscode.TextDocument): Promise<void> { await editorManager.onDidSaveTextDocument(this, doc, tree); });
     });

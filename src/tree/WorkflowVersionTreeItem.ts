@@ -7,6 +7,7 @@ import { Workflow, WorkflowRun, WorkflowVersion } from 'azure-arm-logic/lib/mode
 import { URL } from 'url';
 import * as vscode from 'vscode';
 import { OutputChannel } from 'vscode';
+import { nodeUtils } from '../utils/nodeUtils';
 
 export class WorkflowVersionTreeItem {
     public static contextValue: string = 'azLogicAppsWorkflowVersion';
@@ -27,5 +28,9 @@ export class WorkflowVersionTreeItem {
 
     public get label(): string {
         return this._workflowVersion.name || '';
+    }
+
+    public get iconPath(): string {
+        return nodeUtils.getIconPath(WorkflowVersionTreeItem.contextValue);
     }
 }

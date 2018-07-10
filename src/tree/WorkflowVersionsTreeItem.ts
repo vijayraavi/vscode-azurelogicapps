@@ -9,6 +9,7 @@ import * as vscode from 'vscode';
 import { OutputChannel } from 'vscode';
 import { IAzureTreeItem } from 'vscode-azureextensionui';
 import { ext } from '../extensionVariables';
+import { nodeUtils } from '../utils/nodeUtils';
 import { WorkflowVersionTreeItem } from './WorkflowVersionTreeItem';
 
 export class WorkflowVersionsTreeItem {
