@@ -10,6 +10,7 @@ import { OutputChannel } from 'vscode';
 import { getKuduClient, ILogStream, SiteClient } from 'vscode-azureappservice';
 import { IAzureTreeItem } from 'vscode-azureextensionui';
 import { FunctionConfig, HttpAuthLevel } from '../FunctionConfig';
+import { nodeUtils } from '../utils/nodeUtils';
 
 export class WorkflowRunTreeItem {
     public static contextValue: string = 'azLogicAppsWorkflowRun';
@@ -32,5 +33,9 @@ export class WorkflowRunTreeItem {
 
     public get label(): string {
         return this._workflowRun.name || '';
+    }
+
+    public get iconPath(): string {
+        return nodeUtils.getIconPath(WorkflowRunTreeItem.contextValue);
     }
 }
